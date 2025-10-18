@@ -1,16 +1,16 @@
 import db from "../config/db.js" //importamos el objeto de conexion a la base de datos 
 
-export const getAllTask = (callback) => {
-    db.query("SELECT * FROM task", callback);
+export const getAllTasks = (callback) => {
+    db.query("SELECT * FROM tasks", callback);
 };
 
 export const getTaskById = (id, callback) => {
-    db.query("SELECT * FROM task WHERE id = ?", [id], callback);
+    db.query("SELECT * FROM tasks WHERE id = ?", [id], callback);
 };
 
 export const createTask = (task, callback) => {
     const { title, description } = task;
-    db.query("INSERT INTO task (title, description) VALUES (?,?)", [title, description, callback]);
+    db.query("INSERT INTO tasks (title, description) VALUES (?,?)", [title, description], callback);
 };
 
 export const updateTask = (id, task, callback) => {

@@ -1,36 +1,46 @@
-import TaskList from './components/TaskList';
-import TaskForm from './components/TaskForm';
-import { useState, useEffect } from 'react';
-import api from './api/axiosConfig';
-
+import TaskList from "./components/TaskList";
+import TaskForm from "./components/TaskForm";
+import { useState, useEffect } from "react";
+import api from "./api/axiosConfig";
 
 function App() {
-  const [task, setTasks ] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
+  // Cargar tareas al iniciar
   const fetchTasks = async () => {
     try {
-      const res = await api.get('/tasks');
+      const res = await api.get("/tasks");
       setTasks(res.data);
     } catch (error) {
-      console.error('Error al obtener tareas: ', error);
+      console.error("Error al obtener tareas:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  const handleTaskAdded = (newTask) => {
-    setTasks([...task, newTask]);
-  };
+  // Agregar nueva tarea sin recargar
+  const handleTaskAdded = async (newTask) => {
+  try {
+    // Traer toda la lista actualizada desde el backend
+    const res = await api.get("/tasks");
+    setTasks(res.data);
+  } catch (error) {
+    console.error("Error al actualizar tareas:", error);
+  }
+};
+
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>Task Manager Pro</h1>
+      <h1>Task Manager Pro </h1>
       <TaskForm onTaskAdded={handleTaskAdded} />
-      <TaskList tasks={task} />
+      <TaskList tasks={tasks} />
     </div>
   );
 }
 
 export default App;
+
+

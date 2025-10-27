@@ -1,5 +1,8 @@
+import { useState } from 'react';
 function TaskList({ tasks }) {
-  return (
+  const {count, setCount} = useState(0);
+    
+    return (
     <div>
       <h2>Lista de tareas</h2>
       {tasks.length === 0 ? (
@@ -13,6 +16,11 @@ function TaskList({ tasks }) {
           ))}
         </ul>
       )}
+      <div>
+        <button onClick={setCount + 1}>
+            contar {count}
+        </button>
+      </div>
     </div>
   );
 }

@@ -61,6 +61,7 @@ function App() {
           task.id === taskId ? { ...task, completed: updatedStatus } : task
         )
       );
+      currentStatus ? alert("Tarea marcada como pendiente") : alert("Tarea marcada como completada");
 
       console.log(`Tarea con id ${taskId} actualizada a ${updatedStatus ? "Completada" : "Pendiente"}`);
     } catch (error) {

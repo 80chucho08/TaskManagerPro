@@ -22,21 +22,42 @@ function App() {
 
   // Agregar nueva tarea sin recargar
   const handleTaskAdded = async (newTask) => {
-  try {
-    // Traer toda la lista actualizada desde el backend
-    const res = await api.get("/tasks");
-    setTasks(res.data);
-  } catch (error) {
-    console.error("Error al actualizar tareas:", error);
+    try {
+      // Traer toda la lista actualizada desde el backend
+      const res = await api.get("/tasks");
+      setTasks(res.data);
+    } catch (error) {
+      console.error("Error al actualizar tareas:", error);
+    }
+  };
+
+  const handleDeleteTask = async (taskId) => {
+    // Mostrar mensaje de confirmación
+    const confirmar = window.confirm("¿Estás seguro de que quieres eliminar esta tarea?");
+
+    // Si el usuario cancela, salimos de la función
+    if (!confirmar) return;
+    try {
+      //envio de la peticion al backend con el aid de la tarea
+      await api.delete(`/tasks/${taskId}`);
+      // actualiza  el estado local para que la tarea desaparesca
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+
+      console.log(`Tarea con id  ${taskId} eliminada`);
+    } catch (error) {
+      console.error("Error al eliminar la tarea:", error);
+      alert("Error al eliminar la tarea");
+    }
   }
-};
+
+  
 
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
       <h1>Task Manager Pro </h1>
       <TaskForm onTaskAdded={handleTaskAdded} />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} onDelete={handleDeleteTask} onChecked={handleCheckCompleted} />
     </div>
   );
 }

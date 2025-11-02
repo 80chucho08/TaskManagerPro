@@ -13,7 +13,12 @@ function TaskList({ tasks, onDelete, onChecked }) {
             <li key={task.id}>
               {task.title} — {task.completed ? "Completado" : "Pendiente"}
               <button onClick={() => onDelete(task.id)} >Eliminar</button>
-              <input type="checkbox" onChange={() => onChecked(task.id)} />
+              <input
+                type="checkbox"
+                checked={task.completed === 1 || task.completed === true}
+                onChange={() => onChecked(task.id, task.completed)}
+              />
+
             </li>
           ))}
         </ul>

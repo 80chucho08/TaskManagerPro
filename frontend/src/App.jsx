@@ -50,7 +50,24 @@ function App() {
     }
   }
 
-  
+  const handleCheckCompleted = async (taskId, currentStatus) => {
+    try {
+      const updatedStatus = !currentStatus; // alterna el valor
+      await api.put(`/tasks/${taskId}`, { completed: updatedStatus });
+
+      // Actualiza el estado local sin volver a cargar toda la lista
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === taskId ? { ...task, completed: updatedStatus } : task
+        )
+      );
+
+      console.log(`Tarea con id ${taskId} actualizada a ${updatedStatus ? "Completada" : "Pendiente"}`);
+    } catch (error) {
+      console.error("Error al actualizar el estado de la tarea:", error);
+    }
+  };
+
 
 
   return (

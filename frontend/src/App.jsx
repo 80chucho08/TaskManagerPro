@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
-import { useState, useEffect } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import api from "./api/axiosConfig";
 
 function App() {
@@ -72,10 +74,19 @@ function App() {
 
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>Task Manager Pro </h1>
-      <TaskForm onTaskAdded={handleTaskAdded} />
-      <TaskList tasks={tasks} onDelete={handleDeleteTask} onChecked={handleCheckCompleted} />
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <Header />
+      <main className="flex-grow container mx-auto p-6">
+        <div className="bg-white shadow-lg rounded-2xl p-6">
+          <TaskForm onTaskAdded={handleTaskAdded} />
+          <TaskList 
+            tasks={tasks} 
+            onDelete={handleDeleteTask} 
+            onChecked={handleCheckCompleted} 
+          />
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 }

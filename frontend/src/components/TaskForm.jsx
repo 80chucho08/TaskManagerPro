@@ -34,23 +34,26 @@ function TaskForm({ onTaskAdded }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
-      <h3>Nueva tarea</h3>
+    <form onSubmit={handleSubmit} className="mb-6 flex flex-col md:flex-row items-center gap-4">
+
       <input
         type="text"
         placeholder="Título"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        style={{ padding: "8px", marginRight: "10px", width: "200px" }}
+        className="p-2 rounded-lg border border-gray-300 w-full md:w-1/4"
       />
       <input
         type="text"
         placeholder="Descripción"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        style={{ padding: "8px", marginRight: "10px", width: "250px" }}
+        className="p-2 rounded-lg border border-gray-300 w-full md:w-1/2"
       />
-      <button type="submit" style={{ padding: "8px 16px" }}>
+      <button 
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+      >
         Agregar
       </button>
     </form>

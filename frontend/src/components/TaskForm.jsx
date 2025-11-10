@@ -34,28 +34,30 @@ function TaskForm({ onTaskAdded }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-6 flex flex-col md:flex-row items-center gap-4">
-
-      <input
-        type="text"
-        placeholder="Título"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="p-2 rounded-lg border border-gray-300 w-full md:w-1/4"
-      />
-      <input
-        type="text"
-        placeholder="Descripción"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className="p-2 rounded-lg border border-gray-300 w-full md:w-1/2"
-      />
-      <button 
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-      >
-        Agregar
-      </button>
+    <form onSubmit={handleSubmit}>
+      <h2 className="text-xl font-semibold mb-4">Nueva Tarea</h2>
+      <div className="mb-6 flex flex-col md:flex-row items-center gap-4">
+        <input
+          type="text"
+          placeholder="Título"
+          value={title ?? ""}
+          onChange={(e) => setTitle(e.target.value)}
+          className="p-2 rounded-lg border border-gray-300 w-full md:w-1/4"
+        />
+        <input
+          type="text"
+          placeholder="Descripción"
+          value={description ?? ""}
+          onChange={(e) => setDescription(e.target.value)}
+          className="p-2 rounded-lg border border-gray-300 w-full md:w-1/2"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+        >
+          Agregar
+        </button>
+      </div>
     </form>
   );
 }
